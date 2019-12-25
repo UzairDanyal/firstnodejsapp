@@ -36,6 +36,25 @@ app.post('/signup', async (req, res) => {
     }
 });
 
+app.post('/login',  async (req, res) => {
+    const body = req.body;
+    console.log('req.body', body);
+
+    const email = body.email;
+
+    // lets check if email exists
+
+    const result = await Student.findOne({"email":  email});
+    console.log('result', result);
+
+    // 2. if exists, check if password matches
+
+res.send({
+ result: result
+});
+
+  });
+
 app.get('/students', async (req, res) => {
 
     const allStudents = await Student.find();
